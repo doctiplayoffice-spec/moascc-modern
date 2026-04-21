@@ -1,58 +1,40 @@
 import React from 'react';
 import './index.css';
 
-function AnimatedNumber({ end, suffix = '', delay = 0 }) {
-  const [count, setCount] = React.useState(0);
-  const [isVisible, setIsVisible] = React.useState(false);
-  const ref = React.useRef(null);
+function RotatingStatsCircle() {
+  const statsData = React.useMemo(() => [
+    { value: 9, suffix: '+', label: 'Groupes de Travail' },
+    { value: 500, suffix: '+', label: 'Membres Actifs' },
+    { value: 20, suffix: '+', label: 'Événements Annuels' },
+    { value: 1, suffix: '', label: 'Vision Commune' },
+  ], []);
+
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [fade, setFade] = React.useState(true);
 
   React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    return () => observer.disconnect();
-  }, []);
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % statsData.length);
+        setFade(true);
+      }, 500); 
+    }, 3500); 
+    return () => clearInterval(interval);
+  }, [statsData.length]);
 
-  React.useEffect(() => {
-    if (!isVisible) return;
-    
-    let startTimestamp = null;
-    const duration = 2000;
-    let animationFrameId;
-    let timeoutId;
-
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      
-      setCount(Math.floor(ease * end));
-      
-      if (progress < 1) {
-        animationFrameId = window.requestAnimationFrame(step);
-      }
-    };
-
-    timeoutId = setTimeout(() => {
-      animationFrameId = window.requestAnimationFrame(step);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-    };
-  }, [isVisible, end, delay]);
-
-  return <h3 ref={ref}>{count}{suffix}</h3>;
+  return (
+    <section className="stats-circle-container">
+      <div className="stats-circle">
+        <div className={`stats-content ${fade ? 'fade-in' : 'fade-out'}`}>
+          <h3 className="stats-value">
+            {statsData[currentIndex].value}{statsData[currentIndex].suffix}
+          </h3>
+          <p className="stats-label">{statsData[currentIndex].label}</p>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function App() {
@@ -127,24 +109,7 @@ function App() {
           </div>
         </section>
 
-        <section className="stats">
-          <div className="stat-item">
-            <AnimatedNumber end={9} suffix="+" delay={0} />
-            <p>Groupes de Travail</p>
-          </div>
-          <div className="stat-item">
-            <AnimatedNumber end={500} suffix="+" delay={300} />
-            <p>Membres Actifs</p>
-          </div>
-          <div className="stat-item">
-            <AnimatedNumber end={20} suffix="+" delay={600} />
-            <p>Événements Annuels</p>
-          </div>
-          <div className="stat-item">
-            <AnimatedNumber end={1} suffix="" delay={900} />
-            <p>Vision Commune</p>
-          </div>
-        </section>
+        <RotatingStatsCircle />
 
         <section id="workgroups">
           <div className="section-header">
