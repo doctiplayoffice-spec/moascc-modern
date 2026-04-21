@@ -1,6 +1,60 @@
 import React from 'react';
 import './index.css';
 
+function AnimatedNumber({ end, suffix = '', delay = 0 }) {
+  const [count, setCount] = React.useState(0);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isVisible) return;
+    
+    let startTimestamp = null;
+    const duration = 2000;
+    let animationFrameId;
+    let timeoutId;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      
+      setCount(Math.floor(ease * end));
+      
+      if (progress < 1) {
+        animationFrameId = window.requestAnimationFrame(step);
+      }
+    };
+
+    timeoutId = setTimeout(() => {
+      animationFrameId = window.requestAnimationFrame(step);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [isVisible, end, delay]);
+
+  return <h3 ref={ref}>{count}{suffix}</h3>;
+}
+
 function App() {
   const workGroups = [
     { title: 'Pain Management', desc: 'Approches innovantes pour atténuer la douleur en oncologie.', icon: '💊' },
@@ -75,19 +129,19 @@ function App() {
 
         <section className="stats">
           <div className="stat-item">
-            <h3>9+</h3>
+            <AnimatedNumber end={9} suffix="+" delay={0} />
             <p>Groupes de Travail</p>
           </div>
           <div className="stat-item">
-            <h3>500+</h3>
+            <AnimatedNumber end={500} suffix="+" delay={300} />
             <p>Membres Actifs</p>
           </div>
           <div className="stat-item">
-            <h3>20+</h3>
+            <AnimatedNumber end={20} suffix="+" delay={600} />
             <p>Événements Annuels</p>
           </div>
           <div className="stat-item">
-            <h3>1</h3>
+            <AnimatedNumber end={1} suffix="" delay={900} />
             <p>Vision Commune</p>
           </div>
         </section>
