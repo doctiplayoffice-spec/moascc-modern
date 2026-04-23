@@ -77,37 +77,37 @@ function App() {
         <nav>
           <ul>
             <li className="has-dropdown">
-              <a href="#about">MoASCC ▾</a>
+              <a href="#">MoASCC ▾</a>
               <ul className="dropdown">
-                <li><a href="#about">Qui Sommes Nous</a></li>
-                <li><a href="#partners">Nos Partenaires</a></li>
+                <li><a href="https://moascc.org/missions-et-actions/" target="_blank" rel="noopener noreferrer">Qui Sommes Nous</a></li>
+                <li><a href="https://moascc.org/nos-partenaires/" target="_blank" rel="noopener noreferrer">Nos Partenaires</a></li>
               </ul>
             </li>
             <li className="has-dropdown">
-              <a href="#workgroups">Groupes de Travail ▾</a>
+              <a href="#">Groupes de Travail ▾</a>
               <ul className="dropdown">
-                <li><a href="#wg-pain">Pain Management</a></li>
-                <li><a href="#wg-nutrition">Nutrition</a></li>
-                <li><a href="#wg-psycho">Psychosocial</a></li>
-                <li><a href="#wg-apa">Activités Physiques Adaptées</a></li>
-                <li><a href="#wg-tox">Toxicités Émergentes</a></li>
-                <li><a href="#wg-ferti">Onco-Fertilité</a></li>
-                <li><a href="#wg-cardio">Onco-Cardiologie</a></li>
-                <li><a href="#wg-derma">Onco-Dermatologie</a></li>
-                <li><a href="#wg-survivor">Survivorship Patient Advocacy</a></li>
+                <li><a href="https://moascc.org/pain-management/" target="_blank" rel="noopener noreferrer">Pain Management</a></li>
+                <li><a href="https://moascc.org/nutrition/" target="_blank" rel="noopener noreferrer">Nutrition</a></li>
+                <li><a href="https://moascc.org/psychosocial/" target="_blank" rel="noopener noreferrer">Psychosocial</a></li>
+                <li><a href="https://moascc.org/fatigue/" target="_blank" rel="noopener noreferrer">Activités Physiques Adaptées</a></li>
+                <li><a href="https://moascc.org/toxicite-emergente/" target="_blank" rel="noopener noreferrer">Toxicités Émergentes</a></li>
+                <li><a href="https://moascc.org/onco-fertilite/" target="_blank" rel="noopener noreferrer">Onco-Fertilité</a></li>
+                <li><a href="https://moascc.org/onco-cardiologie/" target="_blank" rel="noopener noreferrer">Onco-Cardiologie</a></li>
+                <li><a href="https://moascc.org/onco-dermatologie/" target="_blank" rel="noopener noreferrer">Onco-Dermatologie</a></li>
+                <li><a href="https://moascc.org/survivorship-patient-advocacy/" target="_blank" rel="noopener noreferrer">Survivorship Patient Advocacy</a></li>
               </ul>
             </li>
             <li className="has-dropdown">
-              <a href="#resources">Ressources ▾</a>
+              <a href="#">Ressources ▾</a>
               <ul className="dropdown">
-                <li><a href="#eval-tools">Outils d’évaluation</a></li>
-                <li><a href="#patient-edu">Education Patient</a></li>
-                <li><a href="#pubs">Publications et Recommandations</a></li>
+                <li><a href="https://moascc.org/outils-devaluation/" target="_blank" rel="noopener noreferrer">Outils d’évaluation</a></li>
+                <li><a href="https://moascc.org/education-des-patients/" target="_blank" rel="noopener noreferrer">Education Patient</a></li>
+                <li><a href="https://moascc.org/publications/" target="_blank" rel="noopener noreferrer">Publications et Recommandations</a></li>
               </ul>
             </li>
-            <li><a href="#events">Événements</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#login" style={{ fontWeight: 700, color: 'var(--primary)' }}>Login</a></li>
+            <li><a href="https://moascc.org/evenements/" target="_blank" rel="noopener noreferrer">Événements</a></li>
+            <li><a href="https://moascc.org/contactez-nous/" target="_blank" rel="noopener noreferrer">Contact</a></li>
+            <li><a href="https://moascc.org/wp-login.php" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 700, color: 'var(--primary)' }}>Login</a></li>
           </ul>
         </nav>
         <button className="btn btn-primary">Adhérer Maintenant</button>
@@ -195,16 +195,16 @@ function App() {
           </div>
           <div className="footer-col">
             <h4>Liens Rapides</h4>
-            <a href="#about">Qui Sommes Nous</a>
-            <a href="#workgroups">Missions et Actions</a>
-            <a href="#events">Événements</a>
-            <a href="#contact">Contact</a>
+            <a href="https://moascc.org/missions-et-actions/" target="_blank" rel="noopener noreferrer">Qui Sommes Nous</a>
+            <a href="https://moascc.org/missions-et-actions/" target="_blank" rel="noopener noreferrer">Missions et Actions</a>
+            <a href="https://moascc.org/evenements/" target="_blank" rel="noopener noreferrer">Événements</a>
+            <a href="https://moascc.org/contactez-nous/" target="_blank" rel="noopener noreferrer">Contact</a>
           </div>
           <div className="footer-col">
             <h4>Ressources</h4>
-            <a href="#">Outils d’évaluation</a>
-            <a href="#">Education Patient</a>
-            <a href="#">Publications</a>
+            <a href="https://moascc.org/outils-devaluation/" target="_blank" rel="noopener noreferrer">Outils d’évaluation</a>
+            <a href="https://moascc.org/education-des-patients/" target="_blank" rel="noopener noreferrer">Education Patient</a>
+            <a href="https://moascc.org/publications/" target="_blank" rel="noopener noreferrer">Publications</a>
           </div>
           <div className="footer-col">
             <h4>Contactez-nous</h4>
