@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, Outlet, useLocation } from 'react-router-dom';
+import { 
+  QuiSommesNous, Partenaires, Evenements, Contact, Login, Adherer,
+  PainManagement, Nutrition, Psychosocial, Fatigue, ToxiciteEmergente,
+  OncoFertilite, OncoCardiologie, OncoDermatologie, Survivorship,
+  OutilsDevaluation, EducationPatient, Publications
+} from './pages';
 import './index.css';
 
 function AnimatedNumber({ end, suffix = '', delay = 0 }) {
@@ -62,14 +68,14 @@ function Layout() {
         <nav>
           <ul>
             <li className="has-dropdown">
-              <Link to="#">MoASCC ▾</Link>
+              <Link to="#" onClick={(e) => e.preventDefault()}>MoASCC ▾</Link>
               <ul className="dropdown">
                 <li><Link to="/missions-et-actions">Qui Sommes Nous</Link></li>
                 <li><Link to="/nos-partenaires">Nos Partenaires</Link></li>
               </ul>
             </li>
             <li className="has-dropdown">
-              <Link to="#">Groupes de Travail ▾</Link>
+              <Link to="#" onClick={(e) => e.preventDefault()}>Groupes de Travail ▾</Link>
               <ul className="dropdown">
                 <li><Link to="/pain-management">Pain Management</Link></li>
                 <li><Link to="/nutrition">Nutrition</Link></li>
@@ -83,7 +89,7 @@ function Layout() {
               </ul>
             </li>
             <li className="has-dropdown">
-              <Link to="#">Ressources ▾</Link>
+              <Link to="#" onClick={(e) => e.preventDefault()}>Ressources ▾</Link>
               <ul className="dropdown">
                 <li><Link to="/outils-devaluation">Outils d’évaluation</Link></li>
                 <li><Link to="/education-des-patients">Education Patient</Link></li>
@@ -95,7 +101,7 @@ function Layout() {
             <li><Link to="/login" style={{ fontWeight: 700, color: 'var(--primary)' }}>Login</Link></li>
           </ul>
         </nav>
-        <button className="btn btn-primary">Adhérer Maintenant</button>
+        <Link to="/adherer" className="btn btn-primary">Adhérer Maintenant</Link>
       </header>
 
       <main>
@@ -244,23 +250,24 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="missions-et-actions" element={<GenericPage title="Missions et Actions" emoji="🎯" />} />
-          <Route path="nos-partenaires" element={<GenericPage title="Nos Partenaires" emoji="🤝" />} />
-          <Route path="pain-management" element={<GenericPage title="Pain Management" emoji="💊" />} />
-          <Route path="nutrition" element={<GenericPage title="Nutrition en Oncologie" emoji="🥗" />} />
-          <Route path="psychosocial" element={<GenericPage title="Soutien Psychosocial" emoji="🧠" />} />
-          <Route path="fatigue" element={<GenericPage title="Activités Physiques Adaptées" emoji="🏃‍♀️" />} />
-          <Route path="toxicite-emergente" element={<GenericPage title="Toxicités Émergentes" emoji="🔬" />} />
-          <Route path="onco-fertilite" element={<GenericPage title="Onco-Fertilité" emoji="👶" />} />
-          <Route path="onco-cardiologie" element={<GenericPage title="Onco-Cardiologie" emoji="❤️" />} />
-          <Route path="onco-dermatologie" element={<GenericPage title="Onco-Dermatologie" emoji="🧴" />} />
-          <Route path="survivorship-patient-advocacy" element={<GenericPage title="Survivorship & Patient Advocacy" emoji="🎗️" />} />
-          <Route path="outils-devaluation" element={<GenericPage title="Outils d'Évaluation" emoji="📋" />} />
-          <Route path="education-des-patients" element={<GenericPage title="Éducation des Patients" emoji="📚" />} />
-          <Route path="publications" element={<GenericPage title="Publications et Recommandations" emoji="📖" />} />
-          <Route path="evenements" element={<GenericPage title="Actualités et Événements" emoji="📅" />} />
-          <Route path="contactez-nous" element={<GenericPage title="Contactez-nous" emoji="✉️" />} />
-          <Route path="login" element={<GenericPage title="Connexion Espace Membre" emoji="🔐" />} />
+          <Route path="missions-et-actions" element={<QuiSommesNous />} />
+          <Route path="nos-partenaires" element={<Partenaires />} />
+          <Route path="pain-management" element={<PainManagement />} />
+          <Route path="nutrition" element={<Nutrition />} />
+          <Route path="psychosocial" element={<Psychosocial />} />
+          <Route path="fatigue" element={<Fatigue />} />
+          <Route path="toxicite-emergente" element={<ToxiciteEmergente />} />
+          <Route path="onco-fertilite" element={<OncoFertilite />} />
+          <Route path="onco-cardiologie" element={<OncoCardiologie />} />
+          <Route path="onco-dermatologie" element={<OncoDermatologie />} />
+          <Route path="survivorship-patient-advocacy" element={<Survivorship />} />
+          <Route path="outils-devaluation" element={<OutilsDevaluation />} />
+          <Route path="education-des-patients" element={<EducationPatient />} />
+          <Route path="publications" element={<Publications />} />
+          <Route path="evenements" element={<Evenements />} />
+          <Route path="contactez-nous" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="adherer" element={<Adherer />} />
           <Route path="*" element={<GenericPage title="Page Introuvable" emoji="🤔" />} />
         </Route>
       </Routes>
