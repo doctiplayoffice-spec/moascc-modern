@@ -98,26 +98,93 @@ export function QuiSommesNous() {
   return (
     <>
       <PageHero 
-        title="Qui Sommes Nous ?" 
+        title="Missions et Actions" 
         emoji="🎯" 
-        description="Moroccan Association of Supportive Care in Cancer (MoASCC) est dédiée à la promotion de l'excellence dans les soins de support en oncologie." 
+        description="L'Association Marocaine des Soins de Support en Oncologie (MoASCC) est une organisation à but non lucratif, engagée dans l'amélioration continue de la qualité de vie des patients." 
       />
+      
       <section style={{ backgroundColor: 'var(--white)' }}>
-        <div className="section-header">
-          <h2>Notre Vision & Nos Missions</h2>
+        <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '1.1rem', color: 'var(--text)', lineHeight: '1.8' }}>
+          <p style={{ marginBottom: '1.5rem' }}>
+            L'Association Marocaine des Soins de Support en Oncologie (MoASCC) est une organisation à but non lucratif, engagée dans l'amélioration continue de la qualité de vie des patients atteints de cancer à travers le développement, la promotion et l'intégration des soins de support dans toutes les étapes de la prise en charge oncologique.
+          </p>
+          
+          <p style={{ marginBottom: '2rem' }}>
+            Fondée par un groupe de professionnels de santé passionnés ; – oncologues médicaux, oncologues radiothérapeutes, chirurgiens, psychologues, et en collaboration avec des patients partenaires – MoASCC a pour mission de :
+          </p>
+
+          <div className="card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--secondary)' }}>
+            <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', color: 'var(--text-light)', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+              <li>Promouvoir les bonnes pratiques en soins de support (douleur, fatigue, nutrition, soins palliatifs, soutien psychologique, etc.)</li>
+              <li>Favoriser la formation continue des professionnels de santé</li>
+              <li>Encourager la recherche scientifique dans le domaine</li>
+              <li>Créer des passerelles entre les disciplines pour une approche intégrée et centrée sur le patient</li>
+              <li>Sensibiliser les patients, leurs proches et le grand public à l'importance des soins de support</li>
+            </ul>
+          </div>
+
+          <p style={{ marginBottom: '1.5rem' }}>
+            Nos activités incluent des conférences, des ateliers, des publications, ainsi que des collaborations nationales et internationales avec d'autres institutions œuvrant dans le domaine de l'oncologie.
+          </p>
+
+          <p style={{ marginBottom: '3rem', fontWeight: '500', color: 'var(--primary)', fontStyle: 'italic' }}>
+            Parce que traiter le cancer ne se résume pas à soigner la tumeur, la MoASCC place le bien-être du patient au cœur de sa démarche globale de prise en charge, alliant expertise médicale, accompagnement psychologique et soutien social pour préserver la qualité de vie de chaque patient.
+          </p>
         </div>
-        <div className="groups-grid">
-          <div className="card">
-            <h3>Vision</h3>
-            <p>Garantir que chaque patient atteint de cancer au Maroc bénéficie de soins de support de haute qualité, intégrés tout au long de son parcours thérapeutique.</p>
+      </section>
+
+      <section id="membres-bureau">
+        <div className="section-header">
+          <h2>Les Membres du Bureau</h2>
+        </div>
+        
+        <div className="groups-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          <div className="card" style={{ borderTop: '4px solid var(--primary)' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-light)', marginBottom: '0.5rem' }}>Président</h3>
+            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary)' }}>Dr Mounir Bachouchi</p>
           </div>
-          <div className="card">
-            <h3>Missions</h3>
-            <p>Promouvoir la formation continue, faciliter la recherche interdisciplinaire, et développer des recommandations nationales adaptées à notre contexte sociétal.</p>
+          
+          <div className="card" style={{ borderTop: '4px solid var(--secondary)' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-light)', marginBottom: '0.5rem' }}>Vice-président</h3>
+            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary)' }}>Pr Hassan Errihani</p>
           </div>
+          
+          <div className="card" style={{ borderTop: '4px solid var(--teal)' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-light)', marginBottom: '0.5rem' }}>Secrétaire Général et Adjoint</h3>
+            <p style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--text)' }}>Dr Ben Abid Fatma</p>
+            <p style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--text)' }}>Mr Farid Chbicheb</p>
+          </div>
+          
+          <div className="card" style={{ borderTop: '4px solid var(--primary-light)' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-light)', marginBottom: '0.5rem' }}>Trésorier et Adjoint</h3>
+            <p style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--text)' }}>Dr Latifa Mesbah</p>
+            <p style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--text)' }}>Pr Rhizlane Belbaraka</p>
+          </div>
+        </div>
+
+        <div className="groups-grid" style={{ marginTop: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
           <div className="card">
-            <h3>Valeurs</h3>
-            <p>Excellence, Empathie, Innovation, et Multidisciplinarité constituent le socle de toutes nos actions en faveur des patients et de leurs familles.</p>
+            <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', marginBottom: '1rem', borderBottom: '2px solid var(--bg)', paddingBottom: '0.5rem' }}>Autres Membres</h3>
+            <ul style={{ color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <li>Pr Amine Souadka</li>
+              <li>Dr Rhondali wadii</li>
+              <li>Dr Sawsan Kharmoum</li>
+              <li>Dr Ikram Nejjar</li>
+              <li>Dr Siham Lkhouyali Dr Mesbah Ilyass</li>
+              <li>Mme Ikram Eseghir</li>
+              <li>Mme Myriam Nciri</li>
+            </ul>
+          </div>
+          
+          <div className="card">
+            <h3 style={{ fontSize: '1.3rem', color: 'var(--secondary)', marginBottom: '1rem', borderBottom: '2px solid var(--bg)', paddingBottom: '0.5rem' }}>Membres d'honneur</h3>
+            <ul style={{ color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <li>Dr Florian Scotte</li>
+              <li>Dr Mayam Lustberg</li>
+              <li>Dr Melissa Chin</li>
+              <li>Pr Jaafar Bennouna</li>
+              <li>Dr Philippe Beuzeboc</li>
+            </ul>
           </div>
         </div>
       </section>
