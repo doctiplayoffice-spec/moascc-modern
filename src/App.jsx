@@ -158,14 +158,57 @@ function Home() {
 
   return (
     <>
-      <section className="hero">
-        <div className="bg-blob-1"></div>
-        <div className="bg-blob-2"></div>
-        <h1>Quand le soin englobe l'humain dans toutes ses dimensions</h1>
-        <p>Moroccan Association of Supportive Care in Cancer.<br/>Rejoignez notre association dédiée aux soins de support et de soutien en oncologie.</p>
-        <div className="hero-actions">
-          <Link to="/missions-et-actions"><button className="btn btn-primary">Découvrir nos Actions</button></Link>
-          <Link to="/contactez-nous"><button className="btn btn-secondary">Nous Contacter</button></Link>
+      <section className="homepage-premium-hero">
+        <div className="premium-glow-1"></div>
+        <div className="premium-glow-2"></div>
+        
+        <div className="premium-hero-content">
+          <h1>Moroccan Association of Surgical Care & Cancer</h1>
+          <p>
+            Moderniser la chirurgie cancérologique par la formation, la recherche et l’innovation.
+          </p>
+          <div className="hero-actions">
+            <Link to="/missions-et-actions"><button className="btn btn-primary">Découvrir l’association</button></Link>
+            <Link to="/missions-et-actions"><button className="btn btn-outline-light">Nos missions</button></Link>
+          </div>
+        </div>
+
+        <div className="premium-hero-visual">
+          <div className="floating-preview-card">
+            <div className="floating-card-glass">
+              <div className="floating-card-glare"></div>
+              
+              <div className="preview-topbar">
+                <div className="dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div className="preview-url">moascc.org</div>
+              </div>
+              
+              <div className="preview-body">
+                <div className="preview-header">
+                  <h2>MOASCC</h2>
+                  <span className="badge">10+ Years</span>
+                </div>
+                <div className="preview-divider"></div>
+                <p className="preview-text">Engagement scientifique pour l'excellence en oncologie.</p>
+                <div className="preview-blocks">
+                  <div className="preview-block">
+                    <span className="block-icon">📚</span>
+                    <span className="block-text">Formation</span>
+                  </div>
+                  <div className="preview-block">
+                    <span className="block-icon">🔬</span>
+                    <span className="block-text">Recherche</span>
+                  </div>
+                  <div className="preview-block">
+                    <span className="block-icon">💡</span>
+                    <span className="block-text">Innovation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

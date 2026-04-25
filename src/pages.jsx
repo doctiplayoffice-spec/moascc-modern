@@ -15,64 +15,26 @@ export function PageHero({ title, emoji, description }) {
   );
 }
 
-export function WorkgroupPage({ title, emoji, role, objectives, axes, actions }) {
+export function ModernPage({ title, emoji, desc, paragraphs, responsable }) {
   return (
     <>
-      <PageHero title={title} emoji={emoji} description={role} />
-      <section style={{ backgroundColor: 'var(--white)' }}>
-        <div className="section-header">
-          <h2>Notre Approche & Objectifs</h2>
-          <p style={{ color: 'var(--text-light)', maxWidth: '600px', margin: '0 auto' }}>Découvrez comment notre groupe de travail s'organise pour améliorer les soins de support.</p>
-        </div>
-        <div className="groups-grid">
-          <div className="card" style={{ borderTop: '4px solid var(--primary)' }}>
-            <h3>🎯 Objectifs Principaux</h3>
-            <ul style={{ paddingLeft: '1.2rem', color: 'var(--text-light)', marginTop: '1rem', lineHeight: '1.8' }}>
-              {objectives.map((obj, i) => <li key={i} style={{ marginBottom: '0.5rem' }}>{obj}</li>)}
-            </ul>
-          </div>
-          <div className="card" style={{ borderTop: '4px solid var(--secondary)' }}>
-            <h3>🛤️ Axes d'Intervention</h3>
-            <ul style={{ paddingLeft: '1.2rem', color: 'var(--text-light)', marginTop: '1rem', lineHeight: '1.8' }}>
-              {axes.map((axe, i) => <li key={i} style={{ marginBottom: '0.5rem' }}>{axe}</li>)}
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div className="section-header">
-          <h2>Actions Possibles & Initiatives</h2>
-        </div>
-        <div className="groups-grid">
-          {actions.map((act, idx) => (
-            <div className="card" key={idx}>
-              <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{act.title}</h4>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.95rem' }}>{act.desc}</p>
-            </div>
+      <PageHero title={title} emoji={emoji} description={desc} />
+      <section style={{ backgroundColor: 'var(--white)', padding: '4rem 5%' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '1.1rem', color: 'var(--text)', lineHeight: '1.8' }}>
+          {paragraphs && paragraphs.map((p, i) => (
+            <p key={i} style={{ marginBottom: '1.5rem' }}>{p}</p>
           ))}
-        </div>
-      </section>
-    </>
-  );
-}
-
-export function ResourcePage({ title, emoji, description, resources }) {
-  return (
-    <>
-      <PageHero title={title} emoji={emoji} description={description} />
-      <section style={{ backgroundColor: 'var(--white)' }}>
-        <div className="section-header">
-          <h2>Ressources Disponibles</h2>
-        </div>
-        <div className="groups-grid">
-          {resources.map((res, idx) => (
-            <div className="card" key={idx} style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>{res.icon}</div>
-              <h3>{res.name}</h3>
-              <p style={{ flex: 1, color: 'var(--text-light)', marginBottom: '1.5rem' }}>{res.utility}</p>
-              <button className="btn btn-secondary" style={{ alignSelf: 'flex-start' }}>Consulter</button>
+          {responsable && (
+            <div className="card" style={{ marginTop: '2rem', borderLeft: '4px solid var(--primary)', display: 'inline-block' }}>
+              <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary)' }}>Responsable :</p>
+              <p style={{ margin: 0, fontSize: '1.2rem' }}>{responsable}</p>
             </div>
-          ))}
+          )}
+          {(!paragraphs || paragraphs.length === 0) && !responsable && (
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-light)', fontStyle: 'italic' }}>
+              <p>Contenu en cours de préparation par MoASCC...</p>
+            </div>
+          )}
         </div>
       </section>
     </>
@@ -353,136 +315,142 @@ export function Adherer() {
 /* --- SPECIFIC PAGES DATA --- */
 
 export function PainManagement() {
-  return <WorkgroupPage title="Pain Management" emoji="💊"
-    role="Améliorer l'évaluation et la prise en charge de la douleur liée au cancer et à ses traitements afin de garantir une meilleure qualité de vie pour les patients."
-    objectives={["Évaluation systématique de tous les types de douleurs", "Mise en place de protocoles antalgiques efficaces et sûrs", "Amélioration continue de la qualité de vie des patients"]}
-    axes={["Formation médicale continue des soignants", "Élaboration de recommandations nationales adaptées", "Soutien aux centres d'oncologie pour la gestion de la douleur"]}
-    actions={[
-      { title: "Masterclass sur les Opioïdes", desc: "Formation avancée sur la prescription et le suivi des traitements antalgiques majeurs." },
-      { title: "Ateliers Pratiques", desc: "Sessions interactives pour le personnel soignant sur l'évaluation de la douleur complexe." },
-      { title: "Livrets Patients", desc: "Création de guides d'information pour aider les patients à exprimer et gérer leur douleur à domicile." }
-    ]} />
+  return <ModernPage 
+    title="Pain Management" emoji="💊"
+    desc="La douleur est l’un des symptômes les plus redoutés et les plus fréquemment rencontrés chez les patients atteints de cancer."
+    paragraphs={[
+      "La douleur est l’un des symptômes les plus redoutés et les plus fréquemment rencontrés chez les patients atteints de cancer, affectant profondément leur qualité de vie à toutes les phases de la maladie. Elle peut résulter directement de la tumeur, des traitements anticancéreux ou de complications associées. En oncologie, une prise en charge efficace de la douleur repose sur une évaluation rigoureuse, multidimensionnelle et régulière, ainsi que sur des approches thérapeutiques intégrées alliant traitements médicamenteux et stratégies non pharmacologiques.",
+      "L’objectif n’est pas seulement de soulager, mais de permettre au patient de maintenir son autonomie, de préserver sa dignité et de renforcer son confort au quotidien. L’intégration des soins de support, en collaboration étroite avec les équipes d’oncologie, est donc essentielle pour garantir une prise en charge globale, personnalisée et évolutive de la douleur cancéreuse.",
+      "Outre les traitements médicamenteux, des thérapies non pharmacologiques sont également bénéfiques dans la gestion de la douleur. Des techniques telles que la physiothérapie, la relaxation, ou l’acupuncture peuvent offrir un soulagement complémentaire. Au sein de l’Association marocaine de soutien contre le cancer, nous encourageons les patients à explorer ces options pour une approche holistique de la gestion de la douleur."
+    ]}
+    responsable="DR ASMAI YASSER"
+  />
 }
 
 export function Nutrition() {
-  return <WorkgroupPage title="Nutrition en Oncologie" emoji="🥗"
-    role="Accompagner les patients sur le plan nutritionnel pour prévenir la dénutrition, soutenir l'observance thérapeutique et optimiser l'immunité."
-    objectives={["Dépistage précoce des troubles nutritionnels", "Conseils diététiques adaptés à chaque phase du traitement", "Soutien du système immunitaire par une nutrition ciblée"]}
-    axes={["Ateliers culinaires adaptés aux effets secondaires", "Formation continue des diététiciens spécialisés", "Intégration d'évaluations nutritionnelles standardisées"]}
-    actions={[
-      { title: "Consultations Dédiées", desc: "Mise en place de parcours de soins nutritionnels personnalisés avec des experts." },
-      { title: "Édition de Recettes", desc: "Création de livres de recettes pour aider à surmonter les troubles du goût et de l'appétit." },
-      { title: "Séminaires Annuels", desc: "Rencontres entre spécialistes pour discuter des dernières avancées en onco-nutrition." }
-    ]} />
+  return <ModernPage 
+    title="Nutrition en Oncologie" emoji="🥗"
+    desc="La nutrition doit être prise en compte pendant le traitement d’un cancer, car elle a un impact sur le patient, la maladie et la guérison."
+    paragraphs={[
+      "Prise en charge nutritionnelle des malades atteints de cancer.",
+      "La nutrition doit être prise en compte pendant le traitement d’un cancer, car elle a un impact sur le patient, la maladie et la guérison. Elle joue un rôle clé dans toutes les phases du traitement oncologique.",
+      "Les objectifs de ce groupe sont :",
+      "• Favoriser les échanges scientifiques au sein du groupe.",
+      "• Diffuser les connaissances validées en nutrition et cancer",
+      "• Participer à la formation des professionnels dans le domaine « nutrition et cancer »"
+    ]}
+    responsable="DR NEJJAR IKRAM ; DR TIKOUR IKRAM"
+  />
 }
 
 export function Psychosocial() {
-  return <WorkgroupPage title="Soutien Psychosocial" emoji="🧠"
-    role="Offrir un environnement de soutien mental, émotionnel et social pour aider le patient et sa famille à faire face à la maladie avec résilience."
-    objectives={["Réduction de l'anxiété et de la détresse émotionnelle", "Accompagnement continu des aidants familiaux", "Orientation pro-active face aux difficultés sociales"]}
-    axes={["Soutien par l'écoute active et les groupes de parole", "Facilitation des consultations psycho-oncologiques", "Formations à la communication pour le personnel soignant"]}
-    actions={[
-      { title: "Groupes d'Échange", desc: "Moments de partage sécurisés encadrés par des professionnels." },
-      { title: "Hotline de Soutien", desc: "Mise en route de solutions d'écoute téléphonique ou de télémédecine pour un soutien rapide." },
-      { title: "Ressources Aidants", desc: "Outils et réunions spécifiquement conçus pour soutenir le cercle familial." }
-    ]} />
+  return <ModernPage 
+    title="Soutien Psychosocial" emoji="🧠"
+    desc="La maladie cancéreuse bouleverse profondément la vie des patients, bien au-delà de ses manifestations physiques."
+    paragraphs={[
+      "La maladie cancéreuse bouleverse profondément la vie des patients, bien au-delà de ses manifestations physiques. Le retentissement psychologique, émotionnel et social du cancer est majeur et nécessite une attention tout aussi rigoureuse que la prise en charge médicale. Anxiété, dépression, isolement, perte de repères, altération de l’image corporelle, perturbation des relations familiales et professionnelles sont autant de défis auxquels les patients peuvent être confrontés tout au long de leur parcours.",
+      "Ce groupe de travail a pour ambition de réfléchir collectivement aux meilleures stratégies d’accompagnement psychosocial, en s’appuyant sur des approches pluridisciplinaires intégrant psychologie, assistance sociale, soins de support, mais aussi témoignages de patients et partenariats associatifs. L’objectif est de proposer des outils concrets, adaptés aux réalités du terrain, pour améliorer la qualité de vie et le vécu global des personnes touchées par le cancer."
+    ]}
+    responsable="DR RHONDALI WALID"
+  />
 }
 
 export function Fatigue() {
-  return <WorkgroupPage title="Activités Physiques Adaptées" emoji="🏃‍♀️"
-    role="Combattre la fatigue induite par le cancer et maintenir les capacités physiques par l'introduction d'exercices physiques encadrés et sécurisés."
-    objectives={["Amélioration de la tolérance globale aux traitements", "Restauration du bien-être physique et psychique", "Prévention de la sarcopénie et diminution de la fatigue"]}
-    axes={["Prescriptions d'Activités Physiques Adaptées (APA)", "Partenariats avec des kinésithérapeutes et coachs spécialisés", "Sensibilisation aux bienfaits du mouvement"]}
-    actions={[
-      { title: "Séances de Yoga et Marche", desc: "Programmes d'activités douces adaptées au rythme de chacun." },
-      { title: "Guides Pratiques à Domicile", desc: "Vidéos et livrets pour encourager une activité modérée et régulière chez soi." },
-      { title: "Randonnées Santé MoASCC", desc: "Événements rassembleurs en plein air pour concilier activité physique et lien social." }
-    ]} />
+  return <ModernPage 
+    title="Activités Physiques Adaptées" emoji="🏃‍♀️"
+    desc="Maintenir une activité physique permet une amélioration symptomatique de la fatigue, de la qualité de vie et de l'état psychologique."
+    paragraphs={[
+      "Pour les patients atteints de cancer, maintenir une activité physique permet une amélioration symptomatique de la fatigue, une amélioration de la qualité de vie et de l’état psychologique et émotionnel.",
+      "L’objectif de ce groupe de travail est de mener une réflexion sur la façon d’implémenter un programme APA dans le parcours de soins du patient en oncologie."
+    ]}
+    responsable="DR MESBAH LATIFA ; DR KHARMOUN SAWSANE"
+  />
 }
 
 export function ToxiciteEmergente() {
-  return <WorkgroupPage title="Toxicités Émergentes" emoji="🔬"
-    role="Anticiper, repérer précocement et gérer efficacement les effets secondaires complexes liés aux nouvelles thérapies ciblées et aux immunothérapies."
-    objectives={["Sécurisation maximale du parcours de soins du patient", "Amélioration de l'éducation thérapeutique sur les signaux d'alerte", "Maintien d'une veille scientifique médicale pointue"]}
-    axes={["Création de réseaux de cliniciens experts", "Mise en place de systèmes d'alertes de sécurité rapides", "Réunions de Concertation Pluridisciplinaire (RCP) Toxicités"]}
-    actions={[
-      { title: "Webinaires de Formation", desc: "Sessions régulières pour former les oncologues à la reconnaissance de toxicités atypiques." },
-      { title: "Mémos Pratiques", desc: "Fiches récapitulatives sur la prise en charge en première ligne selon la MASCC." },
-      { title: "Outils de Suivi Numérique", desc: "Projet de déploiement d'outils d'e-santé pour faciliter le report de symptômes par les patients." }
-    ]} />
+  return <ModernPage 
+    title="Toxicités Émergentes" emoji="🔬"
+    desc="Face aux nouveaux traitements, patients et oncologues doivent gérer de nouvelles toxicités, bien différentes des chimiothérapies classiques."
+    paragraphs={[
+      "Les nouveaux médicaments anticancéreux sont souvent associés à de meilleurs résultats oncologiques. Mais avec ces nouveaux médicaments, les patients, les soignants et les oncologues médicaux doivent faire face à de nouvelles toxicités, bien différentes des effets secondaires de la chimiothérapie conventionnelle.",
+      "L’objectif de ce groupe est de partager les connaissances actuelles sur ces nouvelles toxicités et de mener des études chez le patient marocain."
+    ]}
+    responsable="DR BENABID FATMA"
+  />
 }
 
 export function OncoFertilite() {
-  return <WorkgroupPage title="Onco-Fertilité" emoji="👶"
-    role="Informer, orienter et proposer des solutions concrètes de préservation de la fertilité pour les patients en âge de procréer avant d'entamer des traitements potentiellement gonadotoxiques."
-    objectives={["Garantir l'accès universel à la cryoconservation", "Intégrer les consultations de fertilité précocement dans le parcours", "Assurer un suivi post-traitement de qualité"]}
-    axes={["Collaboration rapprochée avec les centres de PMA", "Information proactive et bienveillante du public", "Plaidoyer au niveau national et institutionnel"]}
-    actions={[
-      { title: "Protocoles d'Urgence", desc: "Mise en place de circuits courts de préservation avant l'initiation de la chimiothérapie." },
-      { title: "Réseau National", desc: "Création d'un annuaire des centres spécialisés en onco-fertilité à la disposition des médecins et des patients." },
-      { title: "Brochures d'Information", desc: "Édition de documents clairs expliquant les risques, les options et les procédures." }
-    ]} />
+  return <ModernPage 
+    title="Onco-Fertilité" emoji="👶"
+    desc="Certains traitements anticancéreux peuvent entraîner une baisse de la fertilité voire une stérilité."
+    paragraphs={[
+      "Certains traitements des cancers peuvent entraîner une baisse de la fertilité voire une stérilité. Il est donc important d’envisager une prise en charge spécifique de préservation de la fertilité pour les patients atteints de cancer.",
+      "Objectifs du groupe :",
+      "• Informer et sensibiliser les professionnels de santé sur la notion de préservation de la fertilité avant un traitement gonadotoxique.",
+      "• Informer les patients sur leurs droits, sur les indications et les techniques de préservation de la fertilité.",
+      "• Elaborer des recommandations nationales à ce sujet.",
+      "• Participer à l’élaboration d’un contexte réglementaire."
+    ]}
+    responsable="DR SIHAM LKHOUALI ; DR BAHAE BENAMAR"
+  />
 }
 
 export function OncoCardiologie() {
-  return <WorkgroupPage title="Onco-Cardiologie" emoji="❤️"
-    role="Prévenir, surveiller et traiter les éventuelles complications cardiovasculaires induites par les traitements anti-cancéreux."
-    objectives={["Réalisation d'une évaluation cardiovasculaire initiale systématique", "Mise en place d'une surveillance optimisée au long cours", "Prévention de la réversibilité de la fonction cardiaque"]}
-    axes={["Facilitation de consultations conjointes Oncologue/Cardiologue", "Développement de registres nationaux", "Enseignement et formation médicale croisée"]}
-    actions={[
-      { title: "Algorithmes Décisionnels", desc: "Mise à disposition de grilles simplifiées pour l'adaptation des doses en fonction du risque cardiaque." },
-      { title: "Séminaires Conjoints", desc: "Rencontres inter-spécialités pour débattre autour de cas cliniques complexes." },
-      { title: "Recommandations Locales", desc: "Publication de fiches pratiques basées sur les données scientifiques internationales (ESMO, MASCC)." }
-    ]} />
+  return <ModernPage 
+    title="Onco-Cardiologie" emoji="❤️"
+    desc="Prévenir, surveiller et prendre en charge les toxicités cardiaques liées aux traitements oncologiques."
+    paragraphs={[
+      "Cancer et maladies cardiovasculaires coexistent souvent et les traitements anticancéreux peuvent être à l’origine d’une toxicité cardiaque ou vasculaire.",
+      "Objectif de ce groupe : améliorer le diagnostic et la prise en charge des complications ou des toxicités cardio-vasculaires des traitements et Fournir aux médecins des protocoles de surveillance et de prise en charge cardiovasculaires des patients traités pour un cancer établis par des cardiologues et oncologues ayant une expertise en cardio-oncologie à partir de recommandations internationales."
+    ]}
+    responsable="DR HANANE BELGHITI"
+  />
 }
 
 export function OncoDermatologie() {
-  return <WorkgroupPage title="Onco-Dermatologie" emoji="🧴"
-    role="Prendre en charge les diverses altérations et toxicités cutanées, unguéales ou capillaires affectant la qualité de vie du patient."
-    objectives={["Prévention et traitement précoce des toxicités cutanées", "Amélioration des soins de support dermatologiques", "Maintien de l'estime de soi à travers la socio-esthétique"]}
-    axes={["Développement de la socio-esthétique dans les services d'oncologie", "Mise à disposition de prescriptions dermatologiques claires", "Formation du personnel infirmier"]}
-    actions={[
-      { title: "Ateliers de Socio-Esthétique", desc: "Séances bien-être offrant soins de peau, de foulards et de maquillage réparateur." },
-      { title: "Guide des Soins Locaux", desc: "Ressource pour le patient permettant de choisir les produits adaptés." },
-      { title: "Consultations Spécialisées", desc: "Coordination avec des dermatologues pour le suivi des toxicités cutanées sévères." }
-    ]} />
+  return <ModernPage 
+    title="Onco-Dermatologie" emoji="🧴"
+    desc="Prendre en charge les effets indésirables cutanés des traitements anticancéreux pour améliorer la qualité de vie."
+    paragraphs={[
+      "Les réactions cutanées sont fréquentes chez les personnes atteintes de cancer. Elles peuvent réduire la qualité de vie et nécessiter des modifications du traitement antinéoplasique. Ces effets indésirables sont souvent sous-déclarés ou négligés.",
+      "Ce groupe d’étude interdisciplinaire vise à favoriser la communication et la collaboration entre les oncologues, les dermatologues, les infirmières et les autres professionnels de soutien afin de développer des stratégies visant à améliorer l’évaluation rapide des toxicités dermatologiques."
+    ]}
+    responsable="DR TBATOU FADWA ; DR AFIF MOHAMED"
+  />
 }
 
 export function Survivorship() {
-  return <WorkgroupPage title="Survivorship & Advocacy" emoji="🎗️"
-    role="Accompagner activement l'après-cancer et soutenir le mouvement global visant à porter la voix des patients dans les instances décisionnelles."
-    objectives={["Faciliter la réinsertion socio-professionnelle", "Standardiser le suivi à long terme post-traitement", "Défense acharnée des droits des patients et des survivants"]}
-    axes={["Campagnes de Plaidoyer (Advocacy) ciblées", "Partenariats innovants avec les employeurs", "Développement de parcours coordonnés post-thérapeutiques"]}
-    actions={[
-      { title: "Sensibilisation Entreprise", desc: "Création d'une charte pour encourager le maintien et le retour à l'emploi après la maladie." },
-      { title: "Réunions Patients Experts", desc: "Impliquer les survivants dans les décisions et les réunions de la MoASCC." },
-      { title: "Annuaire des Droits", desc: "Mise à disposition de ressources légales et d'assistance administrative." }
-    ]} />
+  return <ModernPage 
+    title="Survivorship & Advocacy" emoji="🎗️"
+    desc="Soutenir ceux qui ont vaincu le cancer et défendre leurs droits face aux nouveaux enjeux de l'après-maladie."
+    paragraphs={[
+      "Avec les avancées majeures en oncologie, le nombre de patients vivant plusieurs années après un diagnostic de cancer ne cesse d’augmenter. Cette nouvelle réalité soulève des enjeux spécifiques en termes de suivi médical, de qualité de vie, de gestion des effets tardifs des traitements, de réinsertion sociale et professionnelle, ainsi que de soutien psychologique.",
+      "Le terme ‘survivorship patient advocacy’ désigne l’engagement à soutenir ceux qui ont vaincu le cancer. À travers des efforts de plaidoyer, la MoASCC s’efforce d’améliorer la qualité de vie des survivants."
+    ]}
+    responsable="DR BEN ABID FATMA"
+  />
 }
 
 export function OutilsDevaluation() {
-  return <ResourcePage title="Outils d'Évaluation" emoji="📋" description="Retrouvez ici l'ensemble des scores, échelles et questionnaires validés pour assurer un suivi standardisé et rigoureux en soins de support." 
-    resources={[
-      { name: "Scores d'Évaluation de la Douleur", icon: "📏", utility: "Échelle visuelle analogique (EVA) et questionnaires d'évaluation des neuropathies (DN4)." },
-      { name: "Outils de Dépistage de la Dénutrition", icon: "⚖️", utility: "Formulaires validés tels que le NRS-2002 ou le MUST pour un bilan précoce." },
-      { name: "Questionnaires de Qualité de Vie", icon: "📄", utility: "Échelles EORTC ou équivalents pour le suivi de la fatigue, de l'anxiété et de l'état global du patient." }
-    ]} />
+  return <ModernPage 
+    title="Outils d'Évaluation" emoji="📋" 
+    desc="Outils et scores d'aide à la décision."
+    paragraphs={[]}
+  />
 }
 
 export function EducationPatient() {
-  return <ResourcePage title="Éducation des Patients" emoji="📚" description="Une bibliothèque de ressources créées pour les patients et leurs familles, afin de mieux comprendre et d'agir face à la maladie."
-    resources={[
-      { name: "Brochures Informatées MoASCC", icon: "📑", utility: "Des livrets facilement consultables pour aider à combattre la fatigue, se nourrir, ou gérer les douleurs." },
-      { name: "Vidéos Explicatives", icon: "🎬", utility: "Courtes vidéos éducatives sur la préparation aux traitements et le retour à domicile." },
-      { name: "Kits de Confort", icon: "🎁", utility: "Informations sur le contenu des kits de support pour accompagner les premières chimiothérapies." }
-    ]} />
+  return <ModernPage 
+    title="Éducation des Patients" emoji="📚" 
+    desc="Ressources dédiées à l'éducation thérapeutique."
+    paragraphs={[]}
+  />
 }
 
 export function Publications() {
-  return <ResourcePage title="Publications & Recommandations" emoji="📖" description="Consultez les recommandations de pratiques cliniques édictées ou relayées par MoASCC, l'AFSOS et la MASCC."
-    resources={[
-      { name: "Guidelines Nationales MoASCC", icon: "📘", utility: "Fiches de recommandations actualisées et traduites sur les différents domaines des soins de support." },
-      { name: "Articles Scientifiques et Résumés", icon: "🔬", utility: "Les récentes avancées en soins de support décortiquées pour les professionnels." },
-      { name: "Revue de la MASCC", icon: "🌍", utility: "Accès ou liens vers la bibliographie recommandée de la Multinational Association of Supportive Care in Cancer." }
-    ]} />
+  return <ModernPage 
+    title="Publications & Recommandations" emoji="📖" 
+    desc="Documents et recommandations scientifiques."
+    paragraphs={[]}
+  />
 }
