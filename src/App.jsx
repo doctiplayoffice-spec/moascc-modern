@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { HashRouter, Routes, Route, Link, Outlet, useLocation } from 'react-router-dom';
 import { 
   QuiSommesNous, Partenaires, Evenements, Contact, Login, Adherer,
   PainManagement, Nutrition, Psychosocial, Fatigue, ToxiciteEmergente,
@@ -51,164 +50,88 @@ function AnimatedNumber({ end, suffix = '', delay = 0 }) {
   return <h3 ref={ref}>{count}{suffix}</h3>;
 }
 
-function Layout() {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+const scrollToSection = (e, id) => {
+  e.preventDefault();
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Update hash for sharing
+    window.history.pushState(null, null, `#${id}`);
+  }
+};
 
+function TopNav() {
   return (
-    <>
-      <header>
-        <div className="logo">
-          <Link to="/">
-            <img src="https://moascc.org/wp-content/uploads/2025/03/moascc-logotext-3.png" alt="MoASCC Logo" style={{ height: '60px', width: 'auto' }} />
-          </Link>
-        </div>
-        <nav>
-          <ul>
-            <li className="has-dropdown">
-              <Link to="#" onClick={(e) => e.preventDefault()}>MoASCC ▾</Link>
-              <ul className="dropdown">
-                <li><Link to="/missions-et-actions">Qui Sommes Nous</Link></li>
-                <li><Link to="/nos-partenaires">Nos Partenaires</Link></li>
-              </ul>
-            </li>
-            <li className="has-dropdown">
-              <Link to="#" onClick={(e) => e.preventDefault()}>Groupes de Travail ▾</Link>
-              <ul className="dropdown">
-                <li><Link to="/pain-management">Pain Management</Link></li>
-                <li><Link to="/nutrition">Nutrition</Link></li>
-                <li><Link to="/psychosocial">Psychosocial</Link></li>
-                <li><Link to="/fatigue">Activités Physiques Adaptées</Link></li>
-                <li><Link to="/toxicite-emergente">Toxicités Émergentes</Link></li>
-                <li><Link to="/onco-fertilite">Onco-Fertilité</Link></li>
-                <li><Link to="/onco-cardiologie">Onco-Cardiologie</Link></li>
-                <li><Link to="/onco-dermatologie">Onco-Dermatologie</Link></li>
-                <li><Link to="/survivorship-patient-advocacy">Survivorship Patient Advocacy</Link></li>
-              </ul>
-            </li>
-            <li className="has-dropdown">
-              <Link to="#" onClick={(e) => e.preventDefault()}>Ressources ▾</Link>
-              <ul className="dropdown">
-                <li><Link to="/outils-devaluation">Outils d’évaluation</Link></li>
-                <li><Link to="/education-des-patients">Education Patient</Link></li>
-                <li><Link to="/publications">Publications et Recommandations</Link></li>
-              </ul>
-            </li>
-            <li><Link to="/evenements">Événements</Link></li>
-            <li><Link to="/contactez-nous">Contact</Link></li>
-            <li><Link to="/login" style={{ fontWeight: 700, color: 'var(--primary)' }}>Login</Link></li>
-          </ul>
-        </nav>
-        <Link to="/adherer" className="btn btn-primary">Adhérer Maintenant</Link>
-      </header>
-
-      <main>
-        <Outlet />
-      </main>
-
-      <footer>
-        <div className="footer-content">
-          <div className="footer-col">
-            <h4 style={{fontFamily: 'Outfit', fontSize: '1.5rem', fontWeight: 800}}>Mo<span style={{color: 'var(--secondary)'}}>ASCC</span></h4>
-            <p>Moroccan Association of Supportive Care in Cancer, promouvant l'excellence dans les soins de support.</p>
-          </div>
-          <div className="footer-col">
-            <h4>Liens Rapides</h4>
-            <Link to="/missions-et-actions">Qui Sommes Nous</Link>
-            <Link to="/missions-et-actions">Missions et Actions</Link>
-            <Link to="/evenements">Événements</Link>
-            <Link to="/contactez-nous">Contact</Link>
-          </div>
-          <div className="footer-col">
-            <h4>Ressources</h4>
-            <Link to="/outils-devaluation">Outils d’évaluation</Link>
-            <Link to="/education-des-patients">Education Patient</Link>
-            <Link to="/publications">Publications</Link>
-          </div>
-          <div className="footer-col">
-            <h4>Contactez-nous</h4>
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-              <a href="#" style={{ background: 'rgba(255,255,255,0.1)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>in</a>
-              <a href="#" style={{ background: 'rgba(255,255,255,0.1)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>f</a>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          &copy; {new Date().getFullYear()} MoASCC. Tous droits réservés.
-        </div>
-      </footer>
-    </>
+    <header style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+      <div className="logo">
+        <a href="#home" onClick={(e) => scrollToSection(e, 'home')}>
+          <img src="https://moascc.org/wp-content/uploads/2025/03/moascc-logotext-3.png" alt="MoASCC Logo" style={{ height: '60px', width: 'auto' }} />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li className="has-dropdown">
+            <a href="#qui-sommes-nous" onClick={(e) => e.preventDefault()}>MoASCC ▾</a>
+            <ul className="dropdown">
+              <li><a href="#qui-sommes-nous" onClick={(e) => scrollToSection(e, 'qui-sommes-nous')}>Qui Sommes Nous</a></li>
+              <li><a href="#nos-partenaires" onClick={(e) => scrollToSection(e, 'nos-partenaires')}>Nos Partenaires</a></li>
+            </ul>
+          </li>
+          <li className="has-dropdown">
+            <a href="#pain-management" onClick={(e) => e.preventDefault()}>Groupes de Travail ▾</a>
+            <ul className="dropdown">
+              <li><a href="#pain-management" onClick={(e) => scrollToSection(e, 'pain-management')}>Pain Management</a></li>
+              <li><a href="#nutrition" onClick={(e) => scrollToSection(e, 'nutrition')}>Nutrition</a></li>
+              <li><a href="#psychosocial" onClick={(e) => scrollToSection(e, 'psychosocial')}>Psychosocial</a></li>
+              <li><a href="#fatigue" onClick={(e) => scrollToSection(e, 'fatigue')}>Activités Physiques Adaptées</a></li>
+              <li><a href="#toxicite-emergente" onClick={(e) => scrollToSection(e, 'toxicite-emergente')}>Toxicités Émergentes</a></li>
+              <li><a href="#onco-fertilite" onClick={(e) => scrollToSection(e, 'onco-fertilite')}>Onco-Fertilité</a></li>
+              <li><a href="#onco-cardiologie" onClick={(e) => scrollToSection(e, 'onco-cardiologie')}>Onco-Cardiologie</a></li>
+              <li><a href="#onco-dermatologie" onClick={(e) => scrollToSection(e, 'onco-dermatologie')}>Onco-Dermatologie</a></li>
+              <li><a href="#survivorship-patient-advocacy" onClick={(e) => scrollToSection(e, 'survivorship-patient-advocacy')}>Survivorship Patient Advocacy</a></li>
+            </ul>
+          </li>
+          <li className="has-dropdown">
+            <a href="#outils-devaluation" onClick={(e) => e.preventDefault()}>Ressources ▾</a>
+            <ul className="dropdown">
+              <li><a href="#outils-devaluation" onClick={(e) => scrollToSection(e, 'outils-devaluation')}>Outils d’évaluation</a></li>
+              <li><a href="#education-des-patients" onClick={(e) => scrollToSection(e, 'education-des-patients')}>Education Patient</a></li>
+              <li><a href="#publications" onClick={(e) => scrollToSection(e, 'publications')}>Publications et Recommandations</a></li>
+            </ul>
+          </li>
+          <li><a href="#evenements" onClick={(e) => scrollToSection(e, 'evenements')}>Événements</a></li>
+          <li><a href="#contactez-nous" onClick={(e) => scrollToSection(e, 'contactez-nous')}>Contact</a></li>
+          <li><a href="#login" onClick={(e) => scrollToSection(e, 'login')} style={{ fontWeight: 700, color: 'var(--primary)' }}>Login</a></li>
+        </ul>
+      </nav>
+      <a href="#adherer" onClick={(e) => scrollToSection(e, 'adherer')} className="btn btn-primary">Adhérer Maintenant</a>
+    </header>
   );
 }
 
 function Home() {
   const workGroups = [
-    { title: 'Pain Management', desc: 'Approches innovantes pour atténuer la douleur en oncologie.', icon: '💊', link: '/pain-management' },
-    { title: 'Nutrition', desc: 'Accompagnement diététique personnalisé pour les patients.', icon: '🥗', link: '/nutrition' },
-    { title: 'Psychosocial', desc: 'Soutien psychologique essentiel tout au long du parcours.', icon: '🧠', link: '/psychosocial' },
-    { title: 'Activités Physiques Adaptées', desc: 'Combattre la fatigue avec des programmes d’exercices sur mesure.', icon: '🏃‍♀️', link: '/fatigue' },
-    { title: 'Toxicités Émergentes', desc: 'Gestion des effets secondaires des nouvelles thérapies ciblées.', icon: '🔬', link: '/toxicite-emergente' },
-    { title: 'Onco-Fertilité', desc: 'Préservation de la fertilité chez les jeunes patients.', icon: '👶', link: '/onco-fertilite' },
-    { title: 'Onco-Cardiologie', desc: 'Prévention et traitement des complications cardiovasculaires.', icon: '❤️', link: '/onco-cardiologie' },
-    { title: 'Onco-Dermatologie', desc: 'Prise en charge des toxicités cutanées liées aux traitements.', icon: '🧴', link: '/onco-dermatologie' },
-    { title: 'Survivorship & Advocacy', desc: 'Amélioration de la qualité de vie après le cancer.', icon: '🎗️', link: '/survivorship-patient-advocacy' },
+    { title: 'Pain Management', desc: 'Approches innovantes pour atténuer la douleur en oncologie.', icon: '💊', link: 'pain-management' },
+    { title: 'Nutrition', desc: 'Accompagnement diététique personnalisé pour les patients.', icon: '🥗', link: 'nutrition' },
+    { title: 'Psychosocial', desc: 'Soutien psychologique essentiel tout au long du parcours.', icon: '🧠', link: 'psychosocial' },
+    { title: 'Activités Physiques Adaptées', desc: 'Combattre la fatigue avec des programmes d’exercices sur mesure.', icon: '🏃‍♀️', link: 'fatigue' },
+    { title: 'Toxicités Émergentes', desc: 'Gestion des effets secondaires des nouvelles thérapies ciblées.', icon: '🔬', link: 'toxicite-emergente' },
+    { title: 'Onco-Fertilité', desc: 'Préservation de la fertilité chez les jeunes patients.', icon: '👶', link: 'onco-fertilite' },
+    { title: 'Onco-Cardiologie', desc: 'Prévention et traitement des complications cardiovasculaires.', icon: '❤️', link: 'onco-cardiologie' },
+    { title: 'Onco-Dermatologie', desc: 'Prise en charge des toxicités cutanées liées aux traitements.', icon: '🧴', link: 'onco-dermatologie' },
+    { title: 'Survivorship & Advocacy', desc: 'Amélioration de la qualité de vie après le cancer.', icon: '🎗️', link: 'survivorship-patient-advocacy' },
   ];
 
   return (
-    <>
-      <section className="homepage-premium-hero">
-        <div className="premium-glow-1"></div>
-        <div className="premium-glow-2"></div>
-        
-        <div className="premium-hero-content">
-          <h1>Moroccan Association of Surgical Care & Cancer</h1>
-          <p>
-            Moderniser la chirurgie cancérologique par la formation, la recherche et l’innovation.
-          </p>
-          <div className="hero-actions">
-            <Link to="/missions-et-actions"><button className="btn btn-primary">Découvrir l’association</button></Link>
-            <Link to="/missions-et-actions"><button className="btn btn-outline-light">Nos missions</button></Link>
-          </div>
-        </div>
-
-        <div className="premium-hero-visual">
-          <div className="floating-preview-card">
-            <div className="floating-card-glass">
-              <div className="floating-card-glare"></div>
-              
-              <div className="preview-topbar">
-                <div className="dots">
-                  <span></span><span></span><span></span>
-                </div>
-                <div className="preview-url">moascc.org</div>
-              </div>
-              
-              <div className="preview-body">
-                <div className="preview-header">
-                  <h2>MOASCC</h2>
-                  <span className="badge">10+ Years</span>
-                </div>
-                <div className="preview-divider"></div>
-                <p className="preview-text">Engagement scientifique pour l'excellence en oncologie.</p>
-                <div className="preview-blocks">
-                  <div className="preview-block">
-                    <span className="block-icon">📚</span>
-                    <span className="block-text">Formation</span>
-                  </div>
-                  <div className="preview-block">
-                    <span className="block-icon">🔬</span>
-                    <span className="block-text">Recherche</span>
-                  </div>
-                  <div className="preview-block">
-                    <span className="block-icon">💡</span>
-                    <span className="block-text">Innovation</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div id="home">
+      <section className="hero">
+        <div className="bg-blob-1"></div>
+        <div className="bg-blob-2"></div>
+        <h1>Quand le soin englobe l'humain dans toutes ses dimensions</h1>
+        <p>Moroccan Association of Supportive Care in Cancer.<br/>Rejoignez notre association dédiée aux soins de support et de soutien en oncologie.</p>
+        <div className="hero-actions">
+          <a href="#qui-sommes-nous" onClick={(e) => scrollToSection(e, 'qui-sommes-nous')} className="btn btn-primary">Découvrir nos Actions</a>
+          <a href="#contactez-nous" onClick={(e) => scrollToSection(e, 'contactez-nous')} className="btn btn-secondary">Nous Contacter</a>
         </div>
       </section>
 
@@ -231,7 +154,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="workgroups">
+      <section id="workgroups-grid">
         <div className="section-header">
           <h2>Nos Groupes de Travail</h2>
           <p style={{ color: 'var(--text-light)', maxWidth: '600px', margin: '0 auto' }}>
@@ -244,76 +167,83 @@ function Home() {
               <div className="card-icon">{group.icon}</div>
               <h3>{group.title}</h3>
               <p>{group.desc}</p>
-              <Link to={group.link} className="card-link">En savoir plus <span>→</span></Link>
+              <a href={`#${group.link}`} onClick={(e) => scrollToSection(e, group.link)} className="card-link">En savoir plus <span>→</span></a>
             </div>
           ))}
         </div>
       </section>
-
-      <section id="events" style={{ backgroundColor: 'var(--white)' }}>
-        <div className="section-header">
-          <h2>Actualités & Événements</h2>
-        </div>
-        <div className="groups-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))' }}>
-          <div className="card" style={{ borderLeft: '4px solid var(--secondary)' }}>
-            <div style={{ color: 'var(--secondary)', fontWeight: 'bold', marginBottom: '1rem' }}>À VENIR • 11/01/2026</div>
-            <h3>RANDONNÉE A BENSLIMANE 🥾</h3>
-            <p>Rejoignez-nous pour une journée dédiée au bien-être, à léchange et à l'activité physique en plein air.</p>
-            <Link to="/evenements" className="card-link">Plus d'infos : +212 664 373330</Link>
-          </div>
-          <div className="card" style={{ borderLeft: '4px solid var(--primary)' }}>
-            <div style={{ color: 'var(--primary)', fontWeight: 'bold', marginBottom: '1rem' }}>ACTUALITÉ</div>
-            <h3>Affiliation Internationale</h3>
-            <p>MoASCC est désormais officiellement affiliée à la Multinational Association of Supportive Care in Cancer (MASCC).</p>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-
-function GenericPage({ title, emoji }) {
-  return (
-    <section className="hero" style={{ minHeight: '60vh', paddingBottom: '2rem' }}>
-      <div className="bg-blob-1"></div>
-      <div className="bg-blob-2"></div>
-      <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{emoji}</div>
-      <h1 style={{ marginBottom: '1rem' }}>{title}</h1>
-      <p style={{ maxWidth: '800px' }}>
-        Cette page est actuellement en construction. Bientôt, vous y trouverez tout le contenu détaillé concernant <strong>"{title}"</strong>, modifiable directement par l'équipe MoASCC.
-      </p>
-      <Link to="/"><button className="btn btn-secondary">Retour à l'accueil</button></Link>
-    </section>
+    </div>
   );
 }
 
 export default function App() {
+  useEffect(() => {
+    // Initial scroll handling on direct URL visit with hash
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="missions-et-actions" element={<QuiSommesNous />} />
-          <Route path="nos-partenaires" element={<Partenaires />} />
-          <Route path="pain-management" element={<PainManagement />} />
-          <Route path="nutrition" element={<Nutrition />} />
-          <Route path="psychosocial" element={<Psychosocial />} />
-          <Route path="fatigue" element={<Fatigue />} />
-          <Route path="toxicite-emergente" element={<ToxiciteEmergente />} />
-          <Route path="onco-fertilite" element={<OncoFertilite />} />
-          <Route path="onco-cardiologie" element={<OncoCardiologie />} />
-          <Route path="onco-dermatologie" element={<OncoDermatologie />} />
-          <Route path="survivorship-patient-advocacy" element={<Survivorship />} />
-          <Route path="outils-devaluation" element={<OutilsDevaluation />} />
-          <Route path="education-des-patients" element={<EducationPatient />} />
-          <Route path="publications" element={<Publications />} />
-          <Route path="evenements" element={<Evenements />} />
-          <Route path="contactez-nous" element={<Contact />} />
-          <Route path="login" element={<Login />} />
-          <Route path="adherer" element={<Adherer />} />
-          <Route path="*" element={<GenericPage title="Page Introuvable" emoji="🤔" />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <>
+      <TopNav />
+      <main>
+        <Home />
+        <div id="qui-sommes-nous"><QuiSommesNous /></div>
+        <div id="nos-partenaires"><Partenaires /></div>
+        <div id="pain-management"><PainManagement /></div>
+        <div id="nutrition"><Nutrition /></div>
+        <div id="psychosocial"><Psychosocial /></div>
+        <div id="fatigue"><Fatigue /></div>
+        <div id="toxicite-emergente"><ToxiciteEmergente /></div>
+        <div id="onco-fertilite"><OncoFertilite /></div>
+        <div id="onco-cardiologie"><OncoCardiologie /></div>
+        <div id="onco-dermatologie"><OncoDermatologie /></div>
+        <div id="survivorship-patient-advocacy"><Survivorship /></div>
+        <div id="outils-devaluation"><OutilsDevaluation /></div>
+        <div id="education-des-patients"><EducationPatient /></div>
+        <div id="publications"><Publications /></div>
+        <div id="evenements"><Evenements /></div>
+        <div id="contactez-nous"><Contact /></div>
+        <div id="login"><Login /></div>
+        <div id="adherer"><Adherer /></div>
+      </main>
+      <footer>
+        <div className="footer-content">
+          <div className="footer-col">
+            <h4 style={{fontFamily: 'Outfit', fontSize: '1.5rem', fontWeight: 800}}>Mo<span style={{color: 'var(--secondary)'}}>ASCC</span></h4>
+            <p>Moroccan Association of Supportive Care in Cancer, promouvant l'excellence dans les soins de support.</p>
+          </div>
+          <div className="footer-col">
+            <h4>Liens Rapides</h4>
+            <a href="#qui-sommes-nous" onClick={(e) => scrollToSection(e, 'qui-sommes-nous')}>Qui Sommes Nous</a>
+            <a href="#evenements" onClick={(e) => scrollToSection(e, 'evenements')}>Événements</a>
+            <a href="#contactez-nous" onClick={(e) => scrollToSection(e, 'contactez-nous')}>Contact</a>
+          </div>
+          <div className="footer-col">
+            <h4>Ressources</h4>
+            <a href="#outils-devaluation" onClick={(e) => scrollToSection(e, 'outils-devaluation')}>Outils d’évaluation</a>
+            <a href="#education-des-patients" onClick={(e) => scrollToSection(e, 'education-des-patients')}>Education Patient</a>
+            <a href="#publications" onClick={(e) => scrollToSection(e, 'publications')}>Publications</a>
+          </div>
+          <div className="footer-col">
+            <h4>Contactez-nous</h4>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+              <a href="#" style={{ background: 'rgba(255,255,255,0.1)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>in</a>
+              <a href="#" style={{ background: 'rgba(255,255,255,0.1)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>f</a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          &copy; {new Date().getFullYear()} MoASCC. Tous droits réservés.
+        </div>
+      </footer>
+    </>
   );
 }

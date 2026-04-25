@@ -1,43 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// Removed Link
 
 /* --- TEMPLATES --- */
 
 export function PageHero({ title, emoji, description }) {
   return (
-    <section className="hero" style={{ minHeight: '50vh', paddingBottom: '3rem', paddingTop: '8rem' }}>
-      <div className="bg-blob-1"></div>
-      <div className="bg-blob-2"></div>
-      <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{emoji}</div>
-      <h1 style={{ marginBottom: '1rem' }}>{title}</h1>
-      <p style={{ maxWidth: '800px' }}>{description}</p>
+    <section style={{ backgroundColor: 'var(--bg-light)', padding: '5rem 5% 2rem', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{emoji}</div>
+        <h2 style={{ fontSize: '3rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>{title}</h2>
+        {description && <p style={{ fontSize: '1.2rem', color: 'var(--text)', maxWidth: '800px', margin: '0 auto 2rem', lineHeight: '1.6' }}>{description}</p>}
+      </div>
     </section>
   );
 }
 
 export function ModernPage({ title, emoji, desc, paragraphs, responsable }) {
   return (
-    <>
-      <PageHero title={title} emoji={emoji} description={desc} />
-      <section style={{ backgroundColor: 'var(--white)', padding: '4rem 5%' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '1.1rem', color: 'var(--text)', lineHeight: '1.8' }}>
+    <section style={{ backgroundColor: 'var(--white)', padding: '4rem 5%', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+          <span style={{ fontSize: '3rem' }}>{emoji}</span>
+          <h2 style={{ fontSize: '2.5rem', margin: 0, color: 'var(--primary)' }}>{title}</h2>
+        </div>
+        {desc && <p style={{ fontSize: '1.3rem', color: 'var(--text)', fontWeight: 600, marginBottom: '2rem' }}>{desc}</p>}
+        
+        <div style={{ fontSize: '1.1rem', color: 'var(--text-light)', lineHeight: '1.8' }}>
           {paragraphs && paragraphs.map((p, i) => (
             <p key={i} style={{ marginBottom: '1.5rem' }}>{p}</p>
           ))}
           {responsable && (
-            <div className="card" style={{ marginTop: '2rem', borderLeft: '4px solid var(--primary)', display: 'inline-block' }}>
-              <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary)' }}>Responsable :</p>
-              <p style={{ margin: 0, fontSize: '1.2rem' }}>{responsable}</p>
+            <div className="card" style={{ marginTop: '2rem', borderLeft: '4px solid var(--secondary)', display: 'inline-block', backgroundColor: 'var(--bg-light)' }}>
+              <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--text)' }}>Responsable :</p>
+              <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--primary)' }}>{responsable}</p>
             </div>
           )}
           {(!paragraphs || paragraphs.length === 0) && !responsable && (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-light)', fontStyle: 'italic' }}>
+            <div style={{ padding: '2rem', border: '1px dashed var(--border)', borderRadius: '10px', textAlign: 'center', color: 'var(--text-light)', fontStyle: 'italic' }}>
               <p>Contenu en cours de préparation par MoASCC...</p>
             </div>
           )}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
@@ -262,7 +267,7 @@ export function Login() {
         </div>
         <button type="button" className="btn btn-primary" style={{ width: '100%', marginTop: '1.5rem' }}>Se Connecter</button>
         <div style={{ textAlign: 'center', marginTop: '1rem', color: 'var(--text-light)', fontSize: '0.9rem' }}>
-          Pas encore membre ? <Link to="/adherer" style={{ color: 'var(--teal)', fontWeight: 'bold' }}>Rejoignez-nous</Link>
+          Pas encore membre ? <a href="#adherer" style={{ color: 'var(--teal)', fontWeight: 'bold' }}>Rejoignez-nous</a>
         </div>
       </form>
     </FormPage>
