@@ -5,7 +5,7 @@ import React from 'react';
 
 export function PageHero({ title, emoji, description }) {
   return (
-    <section style={{ backgroundColor: 'var(--bg-light)', padding: '5rem 5% 2rem', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+    <section style={{ backgroundColor: 'rgba(248, 250, 252, 0.85)', backdropFilter: 'blur(5px)', padding: '5rem 5% 2rem', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
         <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{emoji}</div>
         <h2 style={{ fontSize: '3rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>{title}</h2>
@@ -17,7 +17,7 @@ export function PageHero({ title, emoji, description }) {
 
 export function ModernPage({ title, emoji, desc, paragraphs, responsable }) {
   return (
-    <section style={{ backgroundColor: 'var(--white)', padding: '4rem 5%', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+    <section style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(5px)', padding: '4rem 5%', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
           <span style={{ fontSize: '3rem' }}>{emoji}</span>
@@ -30,7 +30,7 @@ export function ModernPage({ title, emoji, desc, paragraphs, responsable }) {
             <p key={i} style={{ marginBottom: '1.5rem' }}>{p}</p>
           ))}
           {responsable && (
-            <div className="card" style={{ marginTop: '2rem', borderLeft: '4px solid var(--secondary)', display: 'inline-block', backgroundColor: 'var(--bg-light)' }}>
+            <div className="card" style={{ marginTop: '2rem', borderLeft: '4px solid var(--secondary)', display: 'inline-block', backgroundColor: 'rgba(248, 250, 252, 0.85)', backdropFilter: 'blur(5px)' }}>
               <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--text)' }}>Responsable :</p>
               <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--primary)' }}>{responsable}</p>
             </div>
@@ -50,7 +50,7 @@ export function FormPage({ title, emoji, description, children }) {
   return (
     <>
       <PageHero title={title} emoji={emoji} description={description} />
-      <section style={{ backgroundColor: 'var(--white)', padding: '4rem 5%' }}>
+      <section style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(5px)', padding: '4rem 5%' }}>
         <div style={{ maxWidth: '600px', margin: '0 auto', background: 'var(--card-bg)', padding: '3rem', borderRadius: '20px', boxShadow: 'var(--shadow)', border: '1px solid var(--border)' }}>
           {children}
         </div>
@@ -70,7 +70,7 @@ export function QuiSommesNous() {
         description="L'Association Marocaine des Soins de Support en Oncologie (MoASCC) est une organisation à but non lucratif, engagée dans l'amélioration continue de la qualité de vie des patients." 
       />
       
-      <section style={{ backgroundColor: 'var(--white)' }}>
+      <section style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(5px)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '1.1rem', color: 'var(--text)', lineHeight: '1.8' }}>
           <p style={{ marginBottom: '1.5rem' }}>
             L'Association Marocaine des Soins de Support en Oncologie (MoASCC) est une organisation à but non lucratif, engagée dans l'amélioration continue de la qualité de vie des patients atteints de cancer à travers le développement, la promotion et l'intégration des soins de support dans toutes les étapes de la prise en charge oncologique.
@@ -167,7 +167,7 @@ export function Partenaires() {
         emoji="🤝" 
         description="Nous collaborons avec des institutions, des associations nationales et internationales, ainsi que des partenaires de l'industrie pour faire avancer les soins de support." 
       />
-      <section style={{ backgroundColor: 'var(--white)' }}>
+      <section style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(5px)' }}>
         <div className="groups-grid">
           <div className="card" style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: '3rem', color: 'var(--primary)', marginBottom: '1rem' }}>MASCC</h2>
@@ -195,7 +195,7 @@ export function Evenements() {
         emoji="📅" 
         description="Retrouvez nos congrès, webinaires, journées de formation et événements de sensibilisation." 
       />
-      <section style={{ backgroundColor: 'var(--white)' }}>
+      <section style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(5px)' }}>
         <div className="groups-grid">
           <div className="card" style={{ borderLeft: '4px solid var(--secondary)' }}>
             <div style={{ color: 'var(--secondary)', fontWeight: 'bold', marginBottom: '1rem' }}>CONGRÈS ANNUEL</div>

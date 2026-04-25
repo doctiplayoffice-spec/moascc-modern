@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   QuiSommesNous, Partenaires, Evenements, Contact, Login, Adherer,
   PainManagement, Nutrition, Psychosocial, Fatigue, ToxiciteEmergente,
@@ -7,12 +7,110 @@ import {
 } from './pages';
 import './index.css';
 
-function AnimatedNumber({ end, suffix = '', delay = 0 }) {
-  const [count, setCount] = React.useState(0);
-  const [isVisible, setIsVisible] = React.useState(false);
-  const ref = React.useRef(null);
+function InteractiveNetwork() {
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    
+    // Resize handler
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+    window.addEventListener('resize', handleResize);
 
-  React.useEffect(() => {
+    const particles = [];
+    for (let i = 0; i < 70; i++) {
+       particles.push({
+         x: Math.random() * width,
+         y: Math.random() * (height + 400),
+         z: Math.random() * 0.8 + 0.2, // Fake depth
+         vx: (Math.random() - 0.5) * 0.4,
+         vy: (Math.random() - 0.5) * 0.4,
+         parallaxSpeed: Math.random() * 0.4 + 0.1
+       });
+    }
+
+    let scrollY = window.scrollY;
+    const handleScroll = () => { scrollY = window.scrollY; };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    let animationFrame;
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+      
+      const H = height + 400; // Buffer zone
+      
+      // Calculate active particles
+      const activeParticles = particles.map(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        // Bounce internal coordinates
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        
+        // Parallax offset
+        let sy = p.y - scrollY * p.parallaxSpeed;
+        sy = ((sy % H) + H) % H - 200; // Wrap between -200 and height + 200
+        
+        return { x: p.x, y: sy, z: p.z };
+      });
+
+      // Draw active particles and connections
+      activeParticles.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3 * p.z, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(14, 165, 233, ${0.6 * p.z})`;
+        ctx.fill();
+
+        for (let j = i + 1; j < activeParticles.length; j++) {
+           const p2 = activeParticles[j];
+           const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+           
+           if (dist < 180) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              // Connection strength based on distance and depth
+              const opacity = 0.2 * (1 - dist / 180) * ((p.z + p2.z) / 2);
+              ctx.strokeStyle = `rgba(14, 165, 233, ${opacity})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+           }
+        }
+      });
+      
+      animationFrame = requestAnimationFrame(render);
+    };
+    
+    render();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+  
+  return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none' }} />;
+}
+
+function AnimatedNumber({ end, suffix = '', delay = 0 }) {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,7 +124,7 @@ function AnimatedNumber({ end, suffix = '', delay = 0 }) {
     return () => observer.disconnect();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isVisible) return;
     let startTimestamp = null;
     const duration = 2000;
@@ -192,6 +290,7 @@ export default function App() {
 
   return (
     <>
+      <InteractiveNetwork />
       <TopNav />
       <main>
         <Home />
